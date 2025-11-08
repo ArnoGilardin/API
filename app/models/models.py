@@ -107,9 +107,7 @@ class Lead(Base):
     # Constraints and Indexes
     __table_args__ = (
         CheckConstraint('confidence_score >= 0 AND confidence_score <= 1', name='check_confidence_range'),
-        Index('idx_leads_location', 'location', postgresql_using='gist'),
         Index('idx_leads_sector_function', 'sector', 'function'),
-        Index('idx_leads_email_verified', 'email', postgresql_where=Column('verified_at').isnot(None)),
         Index('idx_leads_confidence', 'confidence_score', postgresql_ops={'confidence_score': 'DESC'}),
         Index('idx_leads_tags', 'tags', postgresql_using='gin'),
     )
